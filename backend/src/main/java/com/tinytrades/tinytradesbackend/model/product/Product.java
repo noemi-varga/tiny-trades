@@ -24,7 +24,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "products")
 @EntityListeners(AuditingEntityListener.class)
-public abstract class Product {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
