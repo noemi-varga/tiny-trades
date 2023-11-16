@@ -1,4 +1,4 @@
-package com.tinytrades.tinytradesbackend.dto.clothing;
+package com.tinytrades.tinytradesbackend.dto.product.clothing;
 
 import lombok.Builder;
 

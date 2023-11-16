@@ -1,7 +1,8 @@
 package com.tinytrades.tinytradesbackend.service;
 
-import com.tinytrades.tinytradesbackend.dto.clothing.ClothingResponse;
-import com.tinytrades.tinytradesbackend.mapper.ClothingMapper;
+import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
+import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
+import com.tinytrades.tinytradesbackend.mapper.ProductMapper;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
 import com.tinytrades.tinytradesbackend.repository.ClothingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class ClothingService {
         this.clothingRepository = clothingRepository;
     }
 
-    public List<ClothingResponse> findAllClothing() {
+    public List<ProductResponse> findAllClothing() {
         List<Clothing> clothing = clothingRepository.findAll();
-        return clothing.stream().map(ClothingMapper::mapToUserResponse).toList();
+        return clothing.stream().map(ProductMapper::mapToProductResponse).toList();
     }
 }
