@@ -1,11 +1,12 @@
 package com.tinytrades.tinytradesbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tinytrades.tinytradesbackend.model.product.Product;
+import com.tinytrades.tinytradesbackend.model.product.Clothing;
+import com.tinytrades.tinytradesbackend.model.product.Toy;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,13 +43,16 @@ public class User {
     private String location;
 
     @Column(name = "registration_date")
-    private LocalDate registrationDate;
+    private LocalDateTime registrationDate;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
     @OneToMany(mappedBy = "trader", fetch = FetchType.LAZY)
-    private final Set<Product> products = new HashSet<>();
+    private final Set<Clothing> clothes = new HashSet<>();
+
+    @OneToMany(mappedBy = "trader", fetch = FetchType.LAZY)
+    private final Set<Toy> toys = new HashSet<>();
 
 
 
