@@ -66,4 +66,8 @@ public class Toy{
     @Column
     private ToyCategory toyCategory;
 
+    @OneToMany(mappedBy = "toy")
+    private final Set<ProductImage> imageLinks = new HashSet<>();
+
+
 }

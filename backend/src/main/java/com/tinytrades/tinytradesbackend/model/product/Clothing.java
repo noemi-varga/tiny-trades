@@ -74,4 +74,8 @@ public class Clothing{
     @Column
     private ClothingCategory clothingCategory;
 
+    @OneToMany(mappedBy = "clothing")
+    private final Set<ProductImage> imageLinks = new HashSet<>();
+
+
 }
