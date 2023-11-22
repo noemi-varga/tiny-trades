@@ -53,7 +53,7 @@ public class Clothing{
     private String description;
 
     @ElementCollection
-    @CollectionTable(name = "product_tags", joinColumns = @JoinColumn(name = "product_id"))
+    @CollectionTable(name = "clothing_tags", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "tag")
     @Builder.Default
     private Set<String> tags = new HashSet<>();
