@@ -25,7 +25,7 @@ public class UserService {
         return users.stream().map(UserMapper::mapToUserResponse).toList();
     }
 
-    private User findUserById(Long id) {
+    public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User not found with id: " + id));
     }
 
