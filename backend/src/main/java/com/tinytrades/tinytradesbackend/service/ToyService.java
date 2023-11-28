@@ -24,4 +24,9 @@ public class ToyService {
         List<Toy> toys = toyRepository.findAll();
         return toys.stream().map(ProductMapper::mapToProductResponse).toList();
     }
+
+    public List<ProductResponse> findAllClothingByUserId(Long userId) {
+        List<Toy> toys = toyRepository.findAllByTrader_IdIs(userId);
+        return toys.stream().map(ProductMapper::mapToProductResponse).toList();
+    }
 }
