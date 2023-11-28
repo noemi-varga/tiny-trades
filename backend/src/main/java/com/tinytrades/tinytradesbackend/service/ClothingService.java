@@ -1,7 +1,6 @@
 package com.tinytrades.tinytradesbackend.service;
 
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
-import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.NewClothing;
 import com.tinytrades.tinytradesbackend.mapper.ProductMapper;
 import com.tinytrades.tinytradesbackend.model.User;
@@ -28,6 +27,11 @@ public class ClothingService {
 
     public List<ProductResponse> findAllClothing() {
         List<Clothing> clothing = clothingRepository.findAll();
+        return clothing.stream().map(ProductMapper::mapToProductResponse).toList();
+    }
+
+    public List<ProductResponse> findAllClothingByUserId(Long userId) {
+        List<Clothing> clothing = clothingRepository.findAllByTrader_IdIs(userId);
         return clothing.stream().map(ProductMapper::mapToProductResponse).toList();
     }
 

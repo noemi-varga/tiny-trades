@@ -19,12 +19,17 @@ public class ClothingController {
         this.clothingService = clothingService;
     }
 
-    @GetMapping("/clothing/")
+    @GetMapping("/clothing")
     public List<ProductResponse> findAllClothing() {
         return clothingService.findAllClothing();
     }
 
-    @PostMapping("/users/{userId}/clothing/")
+    @GetMapping("/users/{userId}/clothing")
+    public List<ProductResponse> findAllClothingByUserId(@PathVariable Long userId) {
+        return clothingService.findAllClothingByUserId(userId);
+    }
+
+    @PostMapping("/users/{userId}/clothing")
     public ProductResponse addNewClothing(@PathVariable Long userId, @RequestBody NewClothing newClothing){
         return clothingService.addNewClothing(userId, newClothing);
     }
