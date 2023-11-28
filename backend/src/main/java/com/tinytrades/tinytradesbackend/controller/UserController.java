@@ -21,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users/")
+    @GetMapping("/users")
     public List<UserResponse> findAllUsers() {
         return userService.findAllUsers();
     }
@@ -31,7 +31,7 @@ public class UserController {
         return userService.findUserResponseById(id);
     }
 
-    @PostMapping("/users/")
+    @PostMapping("/users")
     public UserResponse addUser(@RequestBody NewUserRequest newUserRequest) {
         return userService.addUser(newUserRequest);
     }
