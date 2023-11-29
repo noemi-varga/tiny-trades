@@ -1,13 +1,12 @@
 package com.tinytrades.tinytradesbackend.controller;
 
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
+import com.tinytrades.tinytradesbackend.dto.product.clothing.NewClothing;
+import com.tinytrades.tinytradesbackend.dto.product.toy.NewToy;
 import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
 import com.tinytrades.tinytradesbackend.service.ToyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +28,11 @@ public class ToyController {
     @GetMapping("/users/{userId}/toy")
     public List<ProductResponse> findAllToyByUserId(@PathVariable Long userId) {
         return toyService.findAllClothingByUserId(userId);
+    }
+
+    @PostMapping("/users/{userId}/toy")
+    public ProductResponse addNewToy(@PathVariable Long userId, @RequestBody NewToy newToy){
+        return toyService.addNewToy(userId, newToy);
     }
 
 
