@@ -2,6 +2,7 @@ package com.tinytrades.tinytradesbackend.mapper;
 
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
+import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
 import com.tinytrades.tinytradesbackend.model.product.Toy;
 
@@ -44,4 +45,20 @@ public class ProductMapper {
                 .build();
     }
 
+    public static ToyResponse mapToToyResponse(Toy toy) {
+        return ToyResponse.builder()
+                .id(toy.getId())
+                .traderId(toy.getTrader().getId())
+                .createdAt(toy.getCreatedAt())
+                .updatedAt(toy.getUpdatedAt())
+                .title(toy.getTitle())
+                .gender(toy.getGender().name())
+                .condition(toy.getCondition().name())
+                .ageGroup(toy.getAgeGroup().name())
+                .description(toy.getDescription())
+                .tags(toy.getTags())
+                .status(toy.getStatus().name())
+                .toyCategory(toy.getToyCategory().name())
+                .build();
+    }
 }
