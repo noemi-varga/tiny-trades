@@ -24,6 +24,11 @@ public class ClothingController {
         return clothingService.findAllClothing();
     }
 
+    @GetMapping("/clothing/{id}")
+    public ClothingResponse findClothingById(@PathVariable Long id) {
+        return clothingService.findClothingById(id);
+    }
+
     @GetMapping("/users/{userId}/clothing")
     public List<ProductResponse> findAllClothingByUserId(@PathVariable Long userId) {
         return clothingService.findAllClothingByUserId(userId);
