@@ -19,7 +19,8 @@ import java.util.Set;
 public class Clothing{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shared_generator")
+    @SequenceGenerator(name = "shared_generator", sequenceName = "shared_seq", allocationSize = 1)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
