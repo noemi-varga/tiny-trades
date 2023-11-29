@@ -1,6 +1,7 @@
 package com.tinytrades.tinytradesbackend.controller;
 
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
+import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.NewClothing;
 import com.tinytrades.tinytradesbackend.dto.product.toy.NewToy;
 import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
@@ -23,6 +24,11 @@ public class ToyController {
     @GetMapping("/toy")
     public List<ProductResponse> findAllToys() {
         return toyService.findAllToys();
+    }
+
+    @GetMapping("/toy/{id}")
+    public ToyResponse findToyById(@PathVariable Long id) {
+        return toyService.findToyById(id);
     }
 
     @GetMapping("/users/{userId}/toy")

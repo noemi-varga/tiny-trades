@@ -2,6 +2,7 @@ package com.tinytrades.tinytradesbackend.service;
 
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import com.tinytrades.tinytradesbackend.dto.product.toy.NewToy;
+import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
 import com.tinytrades.tinytradesbackend.mapper.ProductMapper;
 import com.tinytrades.tinytradesbackend.model.User;
 import com.tinytrades.tinytradesbackend.model.enums.*;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ToyService {
@@ -56,5 +58,10 @@ public class ToyService {
         Toy savedToy = toyRepository.save(toy);
 
         return ProductMapper.mapToProductResponse(savedToy);
+    }
+
+    public ToyResponse findToyById(Long id) {
+        Toy toy = toyRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Toy not found"));
+        return ProductMapper.mapToToyResponse(toy);
     }
 }
