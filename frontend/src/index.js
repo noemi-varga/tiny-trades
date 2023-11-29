@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import ErrorPage from './Pages/ErrorPage';
 import Header from './Pages/Header/Header';
 import Main from './Pages/Main';
+import Product from './Pages/Product';
 
 import './index.css';
 
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />,
+      },
+      {
+        path: "/product/:productId",
+        element: <Product />,
       }
     ],
   }
