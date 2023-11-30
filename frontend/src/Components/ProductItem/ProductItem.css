@@ -1,0 +1,41 @@
+.product-item {
+    display: column;
+    flex-direction: row;
+    align-items: center;
+    margin: 2rem;
+    border: 1px solid #ddd;
+    padding: 1rem;
+}
+
+.product-image {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    margin-right: 1rem;
+}
+
+.product-details h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.25rem;
+}
+
+.product-details p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.product-details button {
+    padding: 0.3rem 0.6rem;
+    background-color: #e789e7;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+.product-details button:hover {
+    background-color: #e641e6;
+}
