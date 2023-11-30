@@ -12,12 +12,16 @@ const ProductList = ({ products }) => {
 
     return (
         <div className="product-list">
-        <h2>All products</h2>
-        <h4>{products.length} products total</h4>
-          {products.map((item, index) => (
-            <ProductItem key={index} item={item} onOpen={handleRedirection}/>
-          ))}
-      </div>
+            <div className="product-list-header">
+                <h2>All Products</h2>
+                <h4>{products.length} products total</h4>
+            </div>
+            <div className="product-items">
+                {products.map((item, index) => (
+                    <ProductItem key={index} item={item} onOpen={handleRedirection}/>
+                ))}
+            </div>
+        </div>
     );
 
 }
