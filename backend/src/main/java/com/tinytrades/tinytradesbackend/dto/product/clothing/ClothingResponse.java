@@ -20,5 +20,7 @@ public record ClothingResponse(
         String status,
         String size,
         String color,
-        String clothingCategory) {
+        String clothingCategory,
+        Set<String> imageLinks
+) {
 }

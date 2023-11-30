@@ -75,8 +75,7 @@ public class Clothing{
     @Column
     private ClothingCategory clothingCategory;
 
-    @OneToMany(mappedBy = "clothing")
+    @OneToMany(mappedBy = "clothing", cascade = CascadeType.ALL, orphanRemoval = true)
     private final Set<ProductImage> imageLinks = new HashSet<>();
-
 
 }

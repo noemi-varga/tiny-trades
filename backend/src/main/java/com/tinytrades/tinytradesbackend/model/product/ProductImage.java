@@ -19,8 +19,10 @@ public class ProductImage {
     private String url;
 
     @ManyToOne
+    @JoinColumn(name = "clothing_id", nullable = true)
     private Clothing clothing;
 
     @ManyToOne
+    @JoinColumn(name = "toy_id", nullable = true)
     private Toy toy;
 }

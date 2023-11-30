@@ -7,6 +7,7 @@ import com.tinytrades.tinytradesbackend.mapper.ProductMapper;
 import com.tinytrades.tinytradesbackend.model.User;
 import com.tinytrades.tinytradesbackend.model.enums.*;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
+import com.tinytrades.tinytradesbackend.model.product.ProductImage;
 import com.tinytrades.tinytradesbackend.repository.ClothingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +22,13 @@ public class ClothingService {
     private final ClothingRepository clothingRepository;
     private final UserService userService;
 
+    private final ProductImageService productImageService;
+
     @Autowired
-    public ClothingService(ClothingRepository clothingRepository, UserService userService) {
+    public ClothingService(ClothingRepository clothingRepository, UserService userService, ProductImageService productImageService) {
         this.clothingRepository = clothingRepository;
         this.userService = userService;
+        this.productImageService = productImageService;
     }
 
     public List<ProductResponse> findAllClothing() {
@@ -56,6 +60,15 @@ public class ClothingService {
                 .build();
 
         Clothing savedClothing = clothingRepository.save(clothing);
+
+        if (newClothing.imageLinks() != null) {
+            for (String imageUrl : newClothing.imageLinks()) {
+                ProductImage image = new ProductImage();
+                image.setUrl(imageUrl);
+                image.setClothing(savedClothing);
+                productImageService.saveProductImage(image);
+            }
+        }
 
         return ProductMapper.mapToProductResponse(savedClothing);
     }

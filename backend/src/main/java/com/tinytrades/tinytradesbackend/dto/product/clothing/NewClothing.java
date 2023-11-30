@@ -15,7 +15,8 @@ public record NewClothing(
         String status,
         String size,
         String color,
-        String clothingCategory
+        String clothingCategory,
+        Set<String> imageLinks
 
 ) {
 }
