@@ -65,6 +65,7 @@ public class ProductMapper {
                 .tags(toy.getTags())
                 .status(toy.getStatus().name())
                 .toyCategory(toy.getToyCategory().name())
+                .imageLinks(toy.getProductImages().stream().map(ProductImage::getUrl).collect(Collectors.toSet()))
                 .build();
     }
 }
