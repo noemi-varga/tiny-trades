@@ -21,7 +21,6 @@ public class ClothingService {
 
     private final ClothingRepository clothingRepository;
     private final UserService userService;
-
     private final ProductImageService productImageService;
 
     @Autowired
