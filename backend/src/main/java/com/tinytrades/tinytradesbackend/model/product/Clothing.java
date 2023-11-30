@@ -76,6 +76,9 @@ public class Clothing{
     private ClothingCategory clothingCategory;
 
     @OneToMany(mappedBy = "clothing", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final Set<ProductImage> imageLinks = new HashSet<>();
+    private final Set<ProductImage> productImages = new HashSet<>();
 
+    public String getFirstImageLink() {
+        return productImages.stream().findFirst().map(ProductImage::getUrl).orElse(null);
+    }
 }

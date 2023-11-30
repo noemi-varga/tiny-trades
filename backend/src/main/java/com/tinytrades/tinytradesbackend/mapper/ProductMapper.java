@@ -4,7 +4,10 @@ import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
 import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
+import com.tinytrades.tinytradesbackend.model.product.ProductImage;
 import com.tinytrades.tinytradesbackend.model.product.Toy;
+
+import java.util.stream.Collectors;
 
 public class ProductMapper {
 
@@ -14,6 +17,7 @@ public class ProductMapper {
                 .id(clothing.getId())
                 .title(clothing.getTitle())
                 .productType(clothing.getClass().getSimpleName())
+                .firstImageLink(clothing.getFirstImageLink())
                 .build();
     }
 
@@ -23,6 +27,7 @@ public class ProductMapper {
                 .id(toy.getId())
                 .title(toy.getTitle())
                 .productType(toy.getClass().getSimpleName())
+                .firstImageLink(toy.getFirstImageLink())
                 .build();
     }
 
@@ -42,6 +47,7 @@ public class ProductMapper {
                 .size(clothing.getSize().name())
                 .color(clothing.getColor().name())
                 .clothingCategory(clothing.getClothingCategory().name())
+                .imageLinks(clothing.getProductImages().stream().map(ProductImage::getUrl).collect(Collectors.toSet()))
                 .build();
     }
 

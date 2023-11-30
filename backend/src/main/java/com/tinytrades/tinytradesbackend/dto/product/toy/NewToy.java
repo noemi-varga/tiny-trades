@@ -10,7 +10,8 @@ public record NewToy(
         String description,
         Set<String> tags,
         String status,
-        String toyCategory
+        String toyCategory,
+        Set<String> imageLinks
 
 ) {
 }
