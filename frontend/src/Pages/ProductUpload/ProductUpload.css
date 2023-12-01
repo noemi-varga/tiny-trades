@@ -1,0 +1,90 @@
+.product-upload-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 1rem;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-upload-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.product-type-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.product-type-selector label {
+    margin-right: 1rem;
+    font-size: 1rem;
+    color: #666;
+}
+
+input[type="text"],
+input[type="radio"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.image-links-section,
+.tags-section {
+    margin-bottom: 1rem;
+}
+
+.image-link-item,
+.tag-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.image-link-item input,
+.tag-item input {
+    flex-grow: 1;
+    margin-right: 0.5rem;
+}
+
+button[type="button"] {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button[type="button"]:hover {
+    background-color: #5a6268;
+}
+
+button[type="submit"] {
+    background-color: #e789e7;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+button[type="submit"]:hover {
+    background-color: #e641e6;
+}
