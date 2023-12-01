@@ -7,6 +7,7 @@ import ErrorPage from './Pages/ErrorPage';
 import Header from './Pages/Header/Header';
 import Main from './Pages/Main';
 import Product from './Pages/Product';
+import ProductUpload from './Pages/ProductUpload';
 
 import './index.css';
 
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/product/:productId",
         element: <Product />,
+      },
+      {
+        path: "/product/new",
+        element: <ProductUpload />
       }
     ],
   }
