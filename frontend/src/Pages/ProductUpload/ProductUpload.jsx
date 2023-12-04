@@ -53,10 +53,6 @@ const ProductUpload = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
   const handleAddTag = () => {
     setTags([...tags, ""]);
   };
@@ -74,8 +70,37 @@ const ProductUpload = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = 1; // TODO Fetch the userId
+
+    const data = {
+        ...formData,
+        tags: tags.filter(tag => tag.trim() !== ''),
+        imageLinks: imageLinks.filter(link => link.trim() !== '')
+      };
+
+      console.log(data);
+
     const endpoint = `/api/v1/users/${userId}/${productType}`;
+
+    try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+    
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Submission successful:', result);
+        } else {
+          console.error('Submission failed:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);   
   };
+
+}
 
   const handleAddImageLink = () => {
     setImageLinks([...imageLinks, ""]);
