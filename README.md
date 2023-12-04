@@ -11,6 +11,8 @@ Welcome to Tiny Trades, an innovative platform dedicated to facilitating the exc
 ## Features
 
 ### Current Features
+- **Browse All Products:** Users can view all available products in a user-friendly layout, making it easy to see the wide range of items on offer.
+- **Upload a New Product:** Users can add new items to the marketplace, including uploading images and providing detailed information about their products.
 
 ### Planned Features
 - **User Uploads**: A user-friendly interface for uploading items including image uploads, detailed item descriptions, and condition ratings.
