@@ -1,32 +1,33 @@
 .product-list {
-    max-width: 80%;
-    margin: 0 auto;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .product-list-header {
-    text-align: center;
+  text-align: center;
 }
 
 .product-list-header h2 {
-    color: #333;
-    font-size: 2rem; 
-    margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .product-list-header h4 {
-    color: #666;
-    margin-bottom: 2rem;
-    font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
 }
 
 .product-items {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1rem;
 }
