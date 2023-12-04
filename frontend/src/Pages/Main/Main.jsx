@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Main.css";
 import ProductList from "../../Components/ProductList";
+import WelcomeMessage from "../../Components/WelcomeMessage";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
@@ -31,7 +32,10 @@ const Main = () => {
 
   return (
     <div className="main-page">
-      <button className="upload-button" onClick={() => handleAddItemClick()}>+ Add Your Item</button>
+      <WelcomeMessage />
+      <button className="upload-button" onClick={() => handleAddItemClick()}>
+        + Add Your Item
+      </button>
       <ProductList products={products} />
     </div>
   );

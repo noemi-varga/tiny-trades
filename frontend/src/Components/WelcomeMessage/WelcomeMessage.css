@@ -1,0 +1,16 @@
+.welcome-message {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--deep-sapphire);
+  }
+  
+  .welcome-message h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .welcome-message p {
+    font-size: 1.2rem;
+    color: var(--salt-box);
+  }
+  
