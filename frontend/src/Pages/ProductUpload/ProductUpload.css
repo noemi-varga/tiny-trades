@@ -1,10 +1,13 @@
 .product-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-width: 600px;
-    margin: auto;
-    padding: 1rem;
+    margin: 2% auto;
+    padding: 1.2rem;
     background-color: var(--pink-lace); 
     border-radius: 8px;
-    box-shadow: 0 2px 4px var(--tumbleweed); 
+    box-shadow: 0 2px 4px rgba(36, 65, 121, 0.144) 
 }
 
 .product-upload-container h2 {
@@ -17,6 +20,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 .product-type-selector label {
@@ -29,6 +33,7 @@ input[type="text"],
 input[type="radio"],
 select,
 textarea {
+    box-sizing: border-box;
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
@@ -39,8 +44,8 @@ textarea {
 }
 
 textarea {
-    height: 100px;
-    resize: vertical;
+    
+    resize:none;
 }
 
 .image-links-section,
