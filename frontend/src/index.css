@@ -12,3 +12,19 @@ code {
     monospace;
 }
 
+:root {
+  --tropical-blue: #c4e3fa;
+  --deep-sapphire: #083966;
+  --marzipan: #f9da9b;
+  --seagull: #79c6e8;
+  --cupid: #fac1d7;
+  --tumbleweed: #deb67f;
+  --kobi: #e4a0bf;
+  --salt-box: #72657a;
+  --fountain-blue: #57a1c3;
+  --blackberry: #8f6478;
+  --english-lavender: #b68099;
+  --piggy-pink: #F4D9E5;
+  --pink-lace: #FDE6EF;
+  --traffic-white: #F0F1EA;
+}

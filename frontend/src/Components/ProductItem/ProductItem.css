@@ -3,8 +3,9 @@
     width: 25%;
     height: 33%;
     margin: 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--piggy-pink);
     padding: 1rem;
+    border-radius: 8%;
 }
 
 .product-image {
@@ -14,18 +15,18 @@
 }
 
 .product-details h3 {
-    color: #333;
+    color: var(--deep-sapphire);
     font-size: 1.1rem;
 }
 
 .product-details p {
-    color: #666;
+    color: var(--salt-box);
     font-size: 0.8rem;
 }
 
 .product-details button {
-    padding: 0.3rem 0.6rem;
-    background-color: #e789e7;
+    padding: 0.3rem;
+    background-color: var(--english-lavender);
     color: white;
     border: none;
     border-radius: 0.25rem;
@@ -36,5 +37,5 @@
 }
 
 .product-details button:hover {
-    background-color: #e641e6;
+    background-color: var(--kobi);
 }

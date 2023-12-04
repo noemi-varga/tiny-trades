@@ -6,16 +6,21 @@ const Header = () => {
   return (
     <>
     <header>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/products">My products</Link>
-          </li>
-        </ul>
-      </nav>
+    <nav>
+          <div className="logo-container">
+            <Link to="/">
+              <img src="/img/tinytrades_logo.png" alt="Logo" className="logo" />
+            </Link>
+          </div>
+          <ul className="nav-links">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/products">My products</Link>
+            </li>
+          </ul>
+        </nav>
     </header>
       <Outlet />
       </>

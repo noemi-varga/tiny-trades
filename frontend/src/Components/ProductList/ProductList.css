@@ -12,13 +12,13 @@
 }
 
 .product-list-header h2 {
-  color: #333;
+  color: var(--deep-sapphire);
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }
 
 .product-list-header h4 {
-  color: #666;
+  color: var(--salt-box);
   margin-bottom: 2rem;
   font-size: 1.2rem;
 }
