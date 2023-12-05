@@ -2,10 +2,7 @@ package com.tinytrades.tinytradesbackend.controller;
 
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +33,18 @@ public class ProductController {
         List<ProductResponse> products = new ArrayList<>();
         products.addAll(clothingController.findAllClothingByUserId(userId));
         products.addAll(toyController.findAllToyByUserId(userId));
+        return products;
+    }
+
+    @GetMapping("/products/search")
+    public List<ProductResponse> searchProducts(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String gender,
+            @RequestParam(required = false) String ageGroup
+    ) {
+        List<ProductResponse> products = new ArrayList<>();
+        products.addAll(clothingController.searchClothing(title, gender, ageGroup));
+        //products.addAll(toyController.searchToy(titleFragment, gender));
         return products;
     }
 

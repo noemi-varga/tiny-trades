@@ -9,9 +9,9 @@ import com.tinytrades.tinytradesbackend.model.enums.*;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
 import com.tinytrades.tinytradesbackend.model.product.ProductImage;
 import com.tinytrades.tinytradesbackend.repository.ClothingRepository;
-import com.tinytrades.tinytradesbackend.repository.specifications.TitleSpecification;
+import com.tinytrades.tinytradesbackend.repository.specifications.ClothingSearchCriteria;
+import com.tinytrades.tinytradesbackend.repository.specifications.ClothingSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -81,13 +81,9 @@ public class ClothingService {
         return ProductMapper.mapToClothingResponse(cloth);
     }
 
-    public List<ProductResponse> searchClothing(String title, String gender) {
-        Specification<Clothing> spec = Specification.where(null);
-
-        if (title != null && !title.isEmpty()) {
-            spec = spec.and(new TitleSpecification(title));
-        }
-    List<Clothing> clothingList = clothingRepository.findAll(spec);
-    return clothingList.stream().map(ProductMapper::mapToProductResponse).collect(Collectors.toList());
+    public List<ProductResponse> searchClothing(ClothingSearchCriteria criteria) {
+        Specification<Clothing> spec = new ClothingSpecification(criteria);
+        List<Clothing> clothingList = clothingRepository.findAll(spec);
+        return clothingList.stream().map(ProductMapper::mapToProductResponse).collect(Collectors.toList());
     }
 }

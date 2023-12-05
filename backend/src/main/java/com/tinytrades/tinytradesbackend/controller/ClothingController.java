@@ -3,6 +3,7 @@ package com.tinytrades.tinytradesbackend.controller;
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.NewClothing;
+import com.tinytrades.tinytradesbackend.repository.specifications.ClothingSearchCriteria;
 import com.tinytrades.tinytradesbackend.service.ClothingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,10 +43,15 @@ public class ClothingController {
     @GetMapping("/clothing/search")
     public List<ProductResponse> searchClothing(
             @RequestParam(required = false) String title,
-            @RequestParam(required = false) String gender
+            @RequestParam(required = false) String gender,
+            @RequestParam(required = false) String ageGroup
     ) {
-        System.out.println(title);
-        return clothingService.searchClothing(title, gender);
+        ClothingSearchCriteria criteria = ClothingSearchCriteria.builder()
+                .titleFragment(title)
+                .gender(gender)
+                .ageGroup(ageGroup)
+                .build();
+        return clothingService.searchClothing(criteria);
     }
 
 }
