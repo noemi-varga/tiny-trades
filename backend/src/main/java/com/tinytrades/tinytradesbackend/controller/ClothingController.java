@@ -39,6 +39,13 @@ public class ClothingController {
         return clothingService.addNewClothing(userId, newClothing);
     }
 
-
+    @GetMapping("/clothing/search")
+    public List<ProductResponse> searchClothing(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String gender
+    ) {
+        System.out.println(title);
+        return clothingService.searchClothing(title, gender);
+    }
 
 }

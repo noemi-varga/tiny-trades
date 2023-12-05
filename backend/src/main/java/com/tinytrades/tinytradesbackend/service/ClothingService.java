@@ -9,12 +9,16 @@ import com.tinytrades.tinytradesbackend.model.enums.*;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
 import com.tinytrades.tinytradesbackend.model.product.ProductImage;
 import com.tinytrades.tinytradesbackend.repository.ClothingRepository;
+import com.tinytrades.tinytradesbackend.repository.specifications.TitleSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class ClothingService {
@@ -75,5 +79,15 @@ public class ClothingService {
     public ClothingResponse findClothingById(Long id) {
         Clothing cloth = clothingRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Clothing not found"));
         return ProductMapper.mapToClothingResponse(cloth);
+    }
+
+    public List<ProductResponse> searchClothing(String title, String gender) {
+        Specification<Clothing> spec = Specification.where(null);
+
+        if (title != null && !title.isEmpty()) {
+            spec = spec.and(new TitleSpecification(title));
+        }
+    List<Clothing> clothingList = clothingRepository.findAll(spec);
+    return clothingList.stream().map(ProductMapper::mapToProductResponse).collect(Collectors.toList());
     }
 }
