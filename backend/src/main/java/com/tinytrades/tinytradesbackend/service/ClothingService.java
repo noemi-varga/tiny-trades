@@ -62,16 +62,16 @@ public class ClothingService {
                 .clothingCategory(ClothingCategory.valueOf(newClothing.clothingCategory()))
                 .build();
 
-        Clothing savedClothing = clothingRepository.save(clothing);
-
         if (newClothing.imageLinks() != null) {
             for (String imageUrl : newClothing.imageLinks()) {
                 ProductImage image = new ProductImage();
                 image.setUrl(imageUrl);
-                image.setClothing(savedClothing);
-                productImageService.saveProductImage(image);
+                //productImageService.saveProductImage(image);
+                clothing.addImage(image);
             }
         }
+
+        Clothing savedClothing = clothingRepository.save(clothing);
 
         return ProductMapper.mapToProductResponse(savedClothing);
     }

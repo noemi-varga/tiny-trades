@@ -58,16 +58,15 @@ public class ToyService {
                 .toyCategory(ToyCategory.valueOf(newToy.toyCategory()))
                 .build();
 
-        Toy savedToy = toyRepository.save(toy);
-
         if (newToy.imageLinks() != null) {
             for (String imageUrl : newToy.imageLinks()) {
                 ProductImage image = new ProductImage();
                 image.setUrl(imageUrl);
-                image.setToy(savedToy);
-                productImageService.saveProductImage(image);
+                toy.addImage(image);
             }
         }
+
+        Toy savedToy = toyRepository.save(toy);
 
         return ProductMapper.mapToProductResponse(savedToy);
     }
