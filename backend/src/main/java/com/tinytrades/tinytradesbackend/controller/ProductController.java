@@ -1,6 +1,7 @@
 package com.tinytrades.tinytradesbackend.controller;
 
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
+import com.tinytrades.tinytradesbackend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,30 +11,24 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1")
 public class ProductController {
+    private final ProductService productService;
 
     private final ClothingController clothingController;
 
-    private final ToyController toyController;
 
     @Autowired
-    public ProductController(ClothingController clothingController, ToyController toyController) {
+    public ProductController(ProductService productService, ClothingController clothingController) {
+        this.productService = productService;
         this.clothingController = clothingController;
-        this.toyController = toyController;
     }
     @GetMapping("/products")
-    public List<ProductResponse> findAllProduct() {
-        List<ProductResponse> products = new ArrayList<>();
-        products.addAll(clothingController.findAllClothing());
-        products.addAll(toyController.findAllToys());
-        return products;
+    public List<ProductResponse> findAllProducts() {
+        return productService.findAllProducts();
     }
 
     @GetMapping("/products/{userId}")
-    public List<ProductResponse> findAllProductByUser(@PathVariable Long userId) {
-        List<ProductResponse> products = new ArrayList<>();
-        products.addAll(clothingController.findAllClothingByUserId(userId));
-        products.addAll(toyController.findAllToyByUserId(userId));
-        return products;
+    public List<ProductResponse> findAllProductsByUser(@PathVariable Long userId) {
+        return productService.findAllProductsByUserId(userId);
     }
 
     @GetMapping("/products/search")
