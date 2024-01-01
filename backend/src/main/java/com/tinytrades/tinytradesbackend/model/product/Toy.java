@@ -3,6 +3,7 @@ import com.tinytrades.tinytradesbackend.model.User;
 import com.tinytrades.tinytradesbackend.model.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
@@ -13,45 +14,10 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 @Table(name = "toys")
-public class Toy{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shared_generator")
-    @SequenceGenerator(name = "shared_generator", sequenceName = "shared_seq", allocationSize = 1)
-    private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trader_id", referencedColumnName = "id")
-    private User trader;
-
-    @Column(name = "created_at")
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-    @Column(name = "title")
-    private String title;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
-    private Gender gender;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "condition")
-    private ConditionType condition;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "age_group")
-    private AgeGroup ageGroup;
-
-    @Column(columnDefinition = "TEXT")
-    private String description;
+public class Toy extends Product{
 
     @ElementCollection
     @CollectionTable(name = "toy_tags", joinColumns = @JoinColumn(name = "product_id"))
@@ -60,18 +26,7 @@ public class Toy{
     private Set<String> tags = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private Status status;
-
-    @Enumerated(EnumType.STRING)
     @Column
     private ToyCategory toyCategory;
-
-    @OneToMany(mappedBy = "toy", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final Set<ProductImage> productImages = new HashSet<>();
-
-    public String getFirstImageLink() {
-        return productImages.stream().findFirst().map(ProductImage::getUrl).orElse(null);
-    }
 
 }
