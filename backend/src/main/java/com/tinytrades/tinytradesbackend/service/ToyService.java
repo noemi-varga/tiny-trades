@@ -37,7 +37,7 @@ public class ToyService {
         return toys.stream().map(ProductMapper::mapToProductResponse).toList();
     }
 
-    public List<ProductResponse> findAllClothingByUserId(Long userId) {
+    public List<ProductResponse> findAllToysByUserId(Long userId) {
         List<Toy> toys = toyRepository.findAllByTrader_IdIs(userId);
         return toys.stream().map(ProductMapper::mapToProductResponse).toList();
     }
