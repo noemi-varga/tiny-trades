@@ -4,6 +4,7 @@ import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
 import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
+import com.tinytrades.tinytradesbackend.model.product.Product;
 import com.tinytrades.tinytradesbackend.model.product.ProductImage;
 import com.tinytrades.tinytradesbackend.model.product.Toy;
 
@@ -11,23 +12,13 @@ import java.util.stream.Collectors;
 
 public class ProductMapper {
 
-    public static ProductResponse mapToProductResponse(Clothing clothing) {
+    public static ProductResponse mapToProductResponse(Product product) {
         return ProductResponse
                 .builder()
-                .id(clothing.getId())
-                .title(clothing.getTitle())
-                .productType(clothing.getClass().getSimpleName())
-                .firstImageLink(clothing.getFirstImageLink())
-                .build();
-    }
-
-    public static ProductResponse mapToProductResponse(Toy toy) {
-        return ProductResponse
-                .builder()
-                .id(toy.getId())
-                .title(toy.getTitle())
-                .productType(toy.getClass().getSimpleName())
-                .firstImageLink(toy.getFirstImageLink())
+                .id(product.getId())
+                .title(product.getTitle())
+                .productType(product.getClass().getSimpleName())
+                .firstImageLink(product.getFirstImageLink())
                 .build();
     }
 
