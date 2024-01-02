@@ -3,6 +3,7 @@ package com.tinytrades.tinytradesbackend.controller;
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.NewClothing;
+import com.tinytrades.tinytradesbackend.dto.product.clothing.UpdateClothing;
 import com.tinytrades.tinytradesbackend.repository.specifications.ClothingSearchCriteria;
 import com.tinytrades.tinytradesbackend.service.ClothingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class ClothingController {
     @PostMapping("/users/{userId}/clothing")
     public ProductResponse addNewClothing(@PathVariable Long userId, @RequestBody NewClothing newClothing){
         return clothingService.addNewClothing(userId, newClothing);
+    }
+
+    @PutMapping("/users/{userId}/clothing/{id}")
+    public ProductResponse updateClothing(@PathVariable Long userId, @PathVariable Long id, @RequestBody UpdateClothing updateClothing){
+        return clothingService.updateClothing(userId, id, updateClothing);
     }
 
     @GetMapping("/clothing/search")

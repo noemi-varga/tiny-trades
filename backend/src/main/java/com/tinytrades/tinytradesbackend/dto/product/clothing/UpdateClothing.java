@@ -1,7 +1,8 @@
 package com.tinytrades.tinytradesbackend.dto.product.clothing;
+
 import java.util.Set;
 
-public record NewClothing(
+public record UpdateClothing(
         String title,
         String gender,
         String condition,
@@ -13,6 +14,5 @@ public record NewClothing(
         String color,
         String clothingCategory,
         Set<String> imageLinks
-
 ) {
 }

@@ -3,6 +3,7 @@ package com.tinytrades.tinytradesbackend.service;
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.NewClothing;
+import com.tinytrades.tinytradesbackend.dto.product.clothing.UpdateClothing;
 import com.tinytrades.tinytradesbackend.mapper.ProductMapper;
 import com.tinytrades.tinytradesbackend.model.User;
 import com.tinytrades.tinytradesbackend.model.enums.*;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -82,5 +84,31 @@ public class ClothingService {
         Specification<Clothing> spec = new ClothingSpecification(criteria);
         List<Clothing> clothingList = clothingRepository.findAll(spec);
         return clothingList.stream().map(ProductMapper::mapToProductResponse).collect(Collectors.toList());
+    }
+
+    public ProductResponse updateClothing(Long userId, Long id, UpdateClothing updateClothing) {
+        User user = userService.findUserById(userId);
+        Clothing clothing = clothingRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Clothing not found"));
+
+        if (!clothing.getTrader().getId().equals(userId)) {
+            throw new IllegalArgumentException("User is not authorized to update this clothing");
+        }
+
+        clothing.setUpdatedAt(LocalDateTime.now());
+        clothing.setTitle(updateClothing.title());
+        clothing.setGender(Gender.valueOf(updateClothing.gender()));
+        clothing.setCondition(ConditionType.valueOf(updateClothing.condition()));
+        clothing.setAgeGroup(AgeGroup.valueOf(updateClothing.ageGroup()));
+        clothing.setDescription(updateClothing.description());
+        clothing.setTags(updateClothing.tags());
+        clothing.setStatus(Status.valueOf(updateClothing.status()));
+        clothing.setSize(ClothingSize.valueOf(updateClothing.size()));
+        clothing.setColor(ClothingColor.valueOf(updateClothing.color()));
+        clothing.setClothingCategory(ClothingCategory.valueOf(updateClothing.clothingCategory()));
+
+        Clothing updatedClothing = clothingRepository.save(clothing);
+
+        return ProductMapper.mapToProductResponse(updatedClothing);
     }
 }
