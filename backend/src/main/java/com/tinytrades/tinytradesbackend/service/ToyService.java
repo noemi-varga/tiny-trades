@@ -3,10 +3,12 @@ package com.tinytrades.tinytradesbackend.service;
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import com.tinytrades.tinytradesbackend.dto.product.toy.NewToy;
 import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
+import com.tinytrades.tinytradesbackend.dto.product.toy.UpdateToy;
 import com.tinytrades.tinytradesbackend.mapper.ProductMapper;
 import com.tinytrades.tinytradesbackend.model.User;
 import com.tinytrades.tinytradesbackend.model.enums.*;
 import com.tinytrades.tinytradesbackend.model.image.ProductImage;
+import com.tinytrades.tinytradesbackend.model.product.Clothing;
 import com.tinytrades.tinytradesbackend.model.product.Toy;
 import com.tinytrades.tinytradesbackend.repository.ToyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,5 +73,29 @@ public class ToyService {
     public ToyResponse findToyById(Long id) {
         Toy toy = toyRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Toy not found"));
         return ProductMapper.mapToToyResponse(toy);
+    }
+
+    public ProductResponse updateToy(Long userId, Long id, UpdateToy updateToy) {
+        User user = userService.findUserById(userId);
+        Toy toy = toyRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Toy not found"));
+
+        if (!toy.getTrader().getId().equals(userId)) {
+            throw new IllegalArgumentException("User is not authorized to update this clothing");
+        }
+
+        toy.setUpdatedAt(LocalDateTime.now());
+        toy.setTitle(updateToy.title());
+        toy.setGender(Gender.valueOf(updateToy.gender()));
+        toy.setCondition(ConditionType.valueOf(updateToy.condition()));
+        toy.setAgeGroup(AgeGroup.valueOf(updateToy.ageGroup()));
+        toy.setDescription(updateToy.description());
+        toy.setTags(updateToy.tags());
+        toy.setStatus(Status.valueOf(updateToy.status()));
+        toy.setToyCategory(ToyCategory.valueOf(updateToy.toyCategory()));
+
+        Toy updatedToy = toyRepository.save(toy);
+
+        return ProductMapper.mapToProductResponse(updatedToy);
     }
 }

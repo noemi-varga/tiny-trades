@@ -1,8 +1,10 @@
 package com.tinytrades.tinytradesbackend.controller;
 
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
+import com.tinytrades.tinytradesbackend.dto.product.clothing.UpdateClothing;
 import com.tinytrades.tinytradesbackend.dto.product.toy.NewToy;
 import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
+import com.tinytrades.tinytradesbackend.dto.product.toy.UpdateToy;
 import com.tinytrades.tinytradesbackend.service.ToyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +39,11 @@ public class ToyController {
     @PostMapping("/users/{userId}/toy")
     public ProductResponse addNewToy(@PathVariable Long userId, @RequestBody NewToy newToy){
         return toyService.addNewToy(userId, newToy);
+    }
+
+    @PutMapping("/users/{userId}/toy/{id}")
+    public ProductResponse updateToy(@PathVariable Long userId, @PathVariable Long id, @RequestBody UpdateToy updateToy){
+        return toyService.updateToy(userId, id, updateToy);
     }
 
 
