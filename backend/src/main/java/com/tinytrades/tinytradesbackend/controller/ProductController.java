@@ -31,6 +31,11 @@ public class ProductController {
         return productService.findAllProductsByUserId(userId);
     }
 
+    @DeleteMapping("/products/{id}")
+    public void deleteProductById(@PathVariable Long id) {
+        productService.deleteProductById(id);
+    }
+
     @GetMapping("/products/search")
     public List<ProductResponse> searchProducts(
             @RequestParam(required = false) String title,

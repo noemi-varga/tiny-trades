@@ -1,4 +1,4 @@
-package com.tinytrades.tinytradesbackend.model.product;
+package com.tinytrades.tinytradesbackend.model.image;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -6,7 +6,7 @@ import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
 import com.tinytrades.tinytradesbackend.mapper.ProductMapper;
 import com.tinytrades.tinytradesbackend.model.User;
 import com.tinytrades.tinytradesbackend.model.enums.*;
-import com.tinytrades.tinytradesbackend.model.product.ProductImage;
+import com.tinytrades.tinytradesbackend.model.image.ProductImage;
 import com.tinytrades.tinytradesbackend.model.product.Toy;
 import com.tinytrades.tinytradesbackend.repository.ToyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +23,10 @@ public class ToyService {
 
     private final UserService userService;
 
-    private final ProductImageService productImageService;
-
     @Autowired
-    public ToyService(ToyRepository toyRepository, UserService userService, ProductImageService productImageService) {
+    public ToyService(ToyRepository toyRepository, UserService userService) {
         this.toyRepository = toyRepository;
         this.userService = userService;
-        this.productImageService = productImageService;
     }
 
     public List<ProductResponse> findAllToys() {

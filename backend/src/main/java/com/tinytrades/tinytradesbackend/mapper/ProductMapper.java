@@ -5,7 +5,7 @@ import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
 import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
 import com.tinytrades.tinytradesbackend.model.product.Product;
-import com.tinytrades.tinytradesbackend.model.product.ProductImage;
+import com.tinytrades.tinytradesbackend.model.image.ProductImage;
 import com.tinytrades.tinytradesbackend.model.product.Toy;
 
 import java.util.stream.Collectors;

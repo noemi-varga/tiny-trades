@@ -6,6 +6,7 @@ import com.tinytrades.tinytradesbackend.model.enums.AgeGroup;
 import com.tinytrades.tinytradesbackend.model.enums.ConditionType;
 import com.tinytrades.tinytradesbackend.model.enums.Gender;
 import com.tinytrades.tinytradesbackend.model.enums.Status;
+import com.tinytrades.tinytradesbackend.model.image.ProductImage;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

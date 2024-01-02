@@ -7,7 +7,7 @@ import com.tinytrades.tinytradesbackend.mapper.ProductMapper;
 import com.tinytrades.tinytradesbackend.model.User;
 import com.tinytrades.tinytradesbackend.model.enums.*;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
-import com.tinytrades.tinytradesbackend.model.product.ProductImage;
+import com.tinytrades.tinytradesbackend.model.image.ProductImage;
 import com.tinytrades.tinytradesbackend.repository.ClothingRepository;
 import com.tinytrades.tinytradesbackend.repository.specifications.ClothingSearchCriteria;
 import com.tinytrades.tinytradesbackend.repository.specifications.ClothingSpecification;
@@ -25,13 +25,11 @@ public class ClothingService {
 
     private final ClothingRepository clothingRepository;
     private final UserService userService;
-    private final ProductImageService productImageService;
 
     @Autowired
-    public ClothingService(ClothingRepository clothingRepository, UserService userService, ProductImageService productImageService) {
+    public ClothingService(ClothingRepository clothingRepository, UserService userService) {
         this.clothingRepository = clothingRepository;
         this.userService = userService;
-        this.productImageService = productImageService;
     }
 
     public List<ProductResponse> findAllClothing() {
@@ -66,7 +64,6 @@ public class ClothingService {
             for (String imageUrl : newClothing.imageLinks()) {
                 ProductImage image = new ProductImage();
                 image.setUrl(imageUrl);
-                //productImageService.saveProductImage(image);
                 clothing.addImage(image);
             }
         }

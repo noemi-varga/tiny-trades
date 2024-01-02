@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ProductService {
@@ -29,4 +30,10 @@ public class ProductService {
         return products.stream().map(ProductMapper::mapToProductResponse).toList();
     }
 
+    public void deleteProductById(Long id) {
+        if (!productRepository.existsById(id)){
+            throw new NoSuchElementException("Product not found");
+        }
+        productRepository.deleteById(id);
+    }
 }
