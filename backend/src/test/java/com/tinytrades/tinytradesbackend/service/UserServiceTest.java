@@ -1,5 +1,6 @@
 package com.tinytrades.tinytradesbackend.service;
 
+import com.tinytrades.tinytradesbackend.dto.user.NewUserRequest;
 import com.tinytrades.tinytradesbackend.dto.user.UserResponse;
 import com.tinytrades.tinytradesbackend.mapper.UserMapper;
 import com.tinytrades.tinytradesbackend.model.User;
@@ -119,4 +120,31 @@ class UserServiceTest {
         Assertions.assertEquals(expectedUsers, actualUsers);
 
     }
+
+    @DisplayName("JUnit test for addUser method")
+    @Test
+    void givenNewUserRequest_whenAddUser_thenReturnUserResponse() {
+        NewUserRequest newUserRequest = new NewUserRequest("newUser", "newEmail@example.com", "newPassword", "New", "User", "New City", "123456789");
+
+        User user = User.builder()
+                .id(1L)
+                .username("newUser")
+                .email("newEmail@example.com")
+                .password("newPassword")
+                .firstName("New")
+                .lastName("User")
+                .location("New City")
+                .registrationDate(LocalDateTime.now())
+                .phoneNumber("123456789")
+                .build();
+
+        given(userRepository.save(user)).willReturn(user);
+
+        UserResponse actualResponse = userService.addUser(newUserRequest);
+
+        UserResponse expectedResponse = UserMapper.mapToUserResponse(user);
+
+        Assertions.assertEquals(expectedResponse, actualResponse);
+    }
+
 }
