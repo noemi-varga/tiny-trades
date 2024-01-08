@@ -1,5 +1,7 @@
 package com.tinytrades.tinytradesbackend.service;
 
+import com.tinytrades.tinytradesbackend.dto.user.UserResponse;
+import com.tinytrades.tinytradesbackend.mapper.UserMapper;
 import com.tinytrades.tinytradesbackend.model.User;
 import com.tinytrades.tinytradesbackend.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -11,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -49,7 +52,7 @@ class UserServiceTest {
 
         User actual = userService.findUserById(testUser.getId());
 
-        Assertions.assertEquals(actual, testUser);
+        Assertions.assertEquals(testUser, actual);
     }
 
     @DisplayName("JUnit test for findUserById method throws Exception")
@@ -61,6 +64,45 @@ class UserServiceTest {
         Assertions.assertThrows(
                 NoSuchElementException.class, () -> userService.findUserById(userId)
         );
+    }
+
+    @DisplayName("JUnit test for findAllUsers method throws Exception")
+    @Test
+    void givenUsersList_whenFindAllUsers_thenReturnUserResponseList() {
+        User testUser = User.builder()
+                .id(1L)
+                .username("testUser")
+                .email("testuser@example.com")
+                .password("testPassword")
+                .firstName("John")
+                .lastName("Doe")
+                .location("Test City")
+                .registrationDate(LocalDateTime.now())
+                .phoneNumber("1234567890")
+                .build();
+
+        User testUser2 = User.builder()
+                .id(1L)
+                .username("testUser2")
+                .email("testuser@example.com")
+                .password("testPassword")
+                .firstName("Jakab")
+                .lastName("Gipsz")
+                .location("Test City")
+                .registrationDate(LocalDateTime.now())
+                .phoneNumber("1234567890")
+                .build();
+
+        given(userRepository.findAll()).willReturn(List.of(testUser, testUser2));
+
+        List<UserResponse> actualUsers = userService.findAllUsers();
+
+        List<UserResponse> expectedUsers = List.of(
+                UserMapper.mapToUserResponse(testUser),
+                UserMapper.mapToUserResponse(testUser2)
+        );
+
+        Assertions.assertEquals(expectedUsers, actualUsers);
 
     }
 }
