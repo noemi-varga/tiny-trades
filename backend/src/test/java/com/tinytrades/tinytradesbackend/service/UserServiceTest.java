@@ -66,7 +66,7 @@ class UserServiceTest {
         );
     }
 
-    @DisplayName("JUnit test for findAllUsers method throws Exception")
+    @DisplayName("JUnit test for findAllUsers method")
     @Test
     void givenUsersList_whenFindAllUsers_thenReturnUserResponseList() {
         User testUser = User.builder()
@@ -101,6 +101,20 @@ class UserServiceTest {
                 UserMapper.mapToUserResponse(testUser),
                 UserMapper.mapToUserResponse(testUser2)
         );
+
+        Assertions.assertEquals(expectedUsers, actualUsers);
+
+    }
+
+    @DisplayName("JUnit test for findAllUsers method if there aren't users in the repository")
+    @Test
+    void givenEmptyList_whenFindAllUsers_thenReturnEmptyList() {
+
+        given(userRepository.findAll()).willReturn(List.of());
+
+        List<UserResponse> actualUsers = userService.findAllUsers();
+
+        List<UserResponse> expectedUsers = List.of();
 
         Assertions.assertEquals(expectedUsers, actualUsers);
 
