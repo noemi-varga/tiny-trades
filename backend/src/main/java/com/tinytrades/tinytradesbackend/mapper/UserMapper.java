@@ -2,7 +2,7 @@ package com.tinytrades.tinytradesbackend.mapper;
 
 import com.tinytrades.tinytradesbackend.dto.user.NewUserRequest;
 import com.tinytrades.tinytradesbackend.dto.user.UserResponse;
-import com.tinytrades.tinytradesbackend.model.User;
+import com.tinytrades.tinytradesbackend.model.user.User;
 
 public class UserMapper {
 

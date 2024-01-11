@@ -1,12 +1,9 @@
 package com.tinytrades.tinytradesbackend.model.product;
-import com.tinytrades.tinytradesbackend.model.User;
 import com.tinytrades.tinytradesbackend.model.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import java.time.LocalDateTime;
+
 import java.util.HashSet;
 import java.util.Set;
 

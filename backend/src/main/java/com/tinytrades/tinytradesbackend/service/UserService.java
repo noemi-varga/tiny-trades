@@ -4,7 +4,7 @@ import com.tinytrades.tinytradesbackend.dto.user.NewUserRequest;
 import com.tinytrades.tinytradesbackend.dto.user.UpdateUserRequest;
 import com.tinytrades.tinytradesbackend.dto.user.UserResponse;
 import com.tinytrades.tinytradesbackend.mapper.UserMapper;
-import com.tinytrades.tinytradesbackend.model.User;
+import com.tinytrades.tinytradesbackend.model.user.User;
 import com.tinytrades.tinytradesbackend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 

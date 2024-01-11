@@ -1,4 +1,4 @@
-package com.tinytrades.tinytradesbackend.model;
+package com.tinytrades.tinytradesbackend.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
@@ -48,12 +48,18 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private final Set<UserRole> userRoles = new HashSet<>();
+
     @OneToMany(mappedBy = "trader", fetch = FetchType.LAZY)
     private final Set<Clothing> clothes = new HashSet<>();
 
     @OneToMany(mappedBy = "trader", fetch = FetchType.LAZY)
     private final Set<Toy> toys = new HashSet<>();
 
+    public void addUserRole(UserRole userRole){
+        userRoles.add(userRole);
+    }
 
 
 }

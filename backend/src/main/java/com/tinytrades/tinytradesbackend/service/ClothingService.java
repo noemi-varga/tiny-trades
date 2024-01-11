@@ -5,7 +5,7 @@ import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.NewClothing;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.UpdateClothing;
 import com.tinytrades.tinytradesbackend.mapper.ProductMapper;
-import com.tinytrades.tinytradesbackend.model.User;
+import com.tinytrades.tinytradesbackend.model.user.User;
 import com.tinytrades.tinytradesbackend.model.enums.*;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
 import com.tinytrades.tinytradesbackend.model.image.ProductImage;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

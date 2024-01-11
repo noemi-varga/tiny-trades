@@ -1,7 +1,7 @@
 package com.tinytrades.tinytradesbackend.model.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tinytrades.tinytradesbackend.model.User;
+import com.tinytrades.tinytradesbackend.model.user.User;
 import com.tinytrades.tinytradesbackend.model.enums.AgeGroup;
 import com.tinytrades.tinytradesbackend.model.enums.ConditionType;
 import com.tinytrades.tinytradesbackend.model.enums.Gender;
