@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -27,7 +28,7 @@ class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
-    // @InjectMocks - problems if other dependencies?
+    // @InjectMocks ?
     private UserService userService;
 
     @BeforeEach
@@ -79,19 +80,19 @@ class UserServiceTest {
                 .firstName("John")
                 .lastName("Doe")
                 .location("Test City")
-                .registrationDate(LocalDateTime.now())
+                .registrationDate(LocalDateTime.of(2024, 1, 11, 10, 0, 0))
                 .phoneNumber("1234567890")
                 .build();
 
         User testUser2 = User.builder()
-                .id(1L)
+                .id(2L)
                 .username("testUser2")
                 .email("testuser@example.com")
                 .password("testPassword")
                 .firstName("Jakab")
                 .lastName("Gipsz")
                 .location("Test City")
-                .registrationDate(LocalDateTime.now())
+                .registrationDate(LocalDateTime.of(2024, 1, 11, 10, 0, 0))
                 .phoneNumber("1234567890")
                 .build();
 
@@ -100,8 +101,8 @@ class UserServiceTest {
         List<UserResponse> actualUsers = userService.findAllUsers();
 
         List<UserResponse> expectedUsers = List.of(
-                UserMapper.mapToUserResponse(testUser),
-                UserMapper.mapToUserResponse(testUser2)
+                new UserResponse(1L, "testUser"),
+                new UserResponse(2L, "testUser2")
         );
 
         Assertions.assertEquals(expectedUsers, actualUsers);
@@ -135,15 +136,15 @@ class UserServiceTest {
                 .firstName("New")
                 .lastName("User")
                 .location("New City")
-                .registrationDate(LocalDateTime.now())
+                .registrationDate(LocalDateTime.of(2024, 1, 11, 10, 0, 0))
                 .phoneNumber("123456789")
                 .build();
 
-        given(userRepository.save(user)).willReturn(user);
+        given(userRepository.save(any(User.class))).willReturn(user);
 
         UserResponse actualResponse = userService.addUser(newUserRequest);
 
-        UserResponse expectedResponse = UserMapper.mapToUserResponse(user);
+        UserResponse expectedResponse = new UserResponse(1L, "newUser");
 
         Assertions.assertEquals(expectedResponse, actualResponse);
     }
@@ -162,7 +163,7 @@ class UserServiceTest {
                 .firstName("Existing")
                 .lastName("User")
                 .location("Existing City")
-                .registrationDate(LocalDateTime.now())
+                .registrationDate(LocalDateTime.of(2024, 1, 11, 10, 0, 0))
                 .phoneNumber("1234567890")
                 .build();
 
@@ -174,7 +175,7 @@ class UserServiceTest {
                 .firstName("Existing")
                 .lastName("User")
                 .location("Existing City")
-                .registrationDate(LocalDateTime.now())
+                .registrationDate(LocalDateTime.of(2024, 1, 11, 10, 0, 0))
                 .phoneNumber("1234567890")
                 .build();
 
@@ -191,7 +192,7 @@ class UserServiceTest {
 
         UserResponse actualResponse = userService.updateUserById(userId, updateUserRequest);
 
-        UserResponse expectedResponse = UserMapper.mapToUserResponse(updatedUser);
+        UserResponse expectedResponse = new UserResponse(1L, "updatedUsername");
 
         Assertions.assertEquals(expectedResponse, actualResponse);
     }
