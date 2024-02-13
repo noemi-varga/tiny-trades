@@ -6,15 +6,12 @@ import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
 import com.tinytrades.tinytradesbackend.dto.product.toy.UpdateToy;
 import com.tinytrades.tinytradesbackend.mapper.ProductMapper;
 import com.tinytrades.tinytradesbackend.model.user.User;
-import com.tinytrades.tinytradesbackend.model.enums.*;
 import com.tinytrades.tinytradesbackend.model.image.ProductImage;
 import com.tinytrades.tinytradesbackend.model.product.Toy;
 import com.tinytrades.tinytradesbackend.repository.ToyRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -38,19 +35,7 @@ public class ToyService {
 
     public ProductResponse addNewToy(Long userId, NewToy newToy) {
         User user = userService.findUserById(userId);
-        Toy toy = Toy.builder()
-                .trader(user)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .title(newToy.title())
-                .gender(Gender.valueOf(newToy.gender()))
-                .condition(ConditionType.valueOf(newToy.condition()))
-                .ageGroup(AgeGroup.valueOf(newToy.ageGroup()))
-                .description(newToy.description())
-                .tags(newToy.tags())
-                .status(Status.ACTIVE)
-                .toyCategory(ToyCategory.valueOf(newToy.toyCategory()))
-                .build();
+        Toy toy = ProductMapper.mapNewToyToToy(newToy, user);
 
         if (newToy.imageLinks() != null) {
             for (String imageUrl : newToy.imageLinks()) {
@@ -66,31 +51,26 @@ public class ToyService {
     }
 
     public ToyResponse findToyById(Long id) {
-        Toy toy = toyRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Toy not found"));
+        Toy toy = getToyById(id);
         return ProductMapper.mapToToyResponse(toy);
     }
 
     public ProductResponse updateToy(Long userId, Long id, UpdateToy updateToy) {
-        User user = userService.findUserById(userId);
-        Toy toy = toyRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Toy not found"));
+        Toy toy = getToyById(id);
 
         if (!toy.getTrader().getId().equals(userId)) {
             throw new IllegalArgumentException("User is not authorized to update this clothing");
         }
 
-        toy.setUpdatedAt(LocalDateTime.now());
-        toy.setTitle(updateToy.title());
-        toy.setGender(Gender.valueOf(updateToy.gender()));
-        toy.setCondition(ConditionType.valueOf(updateToy.condition()));
-        toy.setAgeGroup(AgeGroup.valueOf(updateToy.ageGroup()));
-        toy.setDescription(updateToy.description());
-        toy.setTags(updateToy.tags());
-        toy.setStatus(Status.valueOf(updateToy.status()));
-        toy.setToyCategory(ToyCategory.valueOf(updateToy.toyCategory()));
+        ProductMapper.setUpdateToyToToy(updateToy, toy);
 
         Toy updatedToy = toyRepository.save(toy);
 
         return ProductMapper.mapToProductResponse(updatedToy);
     }
+
+    private Toy getToyById(Long id) {
+        return toyRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Toy not found"));
+    }
+
 }

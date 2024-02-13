@@ -4,7 +4,9 @@ import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.NewClothing;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.UpdateClothing;
+import com.tinytrades.tinytradesbackend.dto.product.toy.NewToy;
 import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
+import com.tinytrades.tinytradesbackend.dto.product.toy.UpdateToy;
 import com.tinytrades.tinytradesbackend.model.enums.*;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
 import com.tinytrades.tinytradesbackend.model.product.Product;
@@ -95,5 +97,33 @@ public class ProductMapper {
         clothing.setSize(ClothingSize.valueOf(updateClothing.size()));
         clothing.setColor(ClothingColor.valueOf(updateClothing.color()));
         clothing.setClothingCategory(ClothingCategory.valueOf(updateClothing.clothingCategory()));
+    }
+
+    public static Toy mapNewToyToToy(NewToy newToy, User user) {
+        return Toy.builder()
+                .trader(user)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .title(newToy.title())
+                .gender(Gender.valueOf(newToy.gender()))
+                .condition(ConditionType.valueOf(newToy.condition()))
+                .ageGroup(AgeGroup.valueOf(newToy.ageGroup()))
+                .description(newToy.description())
+                .tags(newToy.tags())
+                .status(Status.ACTIVE)
+                .toyCategory(ToyCategory.valueOf(newToy.toyCategory()))
+                .build();
+    }
+
+    public static void setUpdateToyToToy(UpdateToy updateToy, Toy toy) {
+        toy.setUpdatedAt(LocalDateTime.now());
+        toy.setTitle(updateToy.title());
+        toy.setGender(Gender.valueOf(updateToy.gender()));
+        toy.setCondition(ConditionType.valueOf(updateToy.condition()));
+        toy.setAgeGroup(AgeGroup.valueOf(updateToy.ageGroup()));
+        toy.setDescription(updateToy.description());
+        toy.setTags(updateToy.tags());
+        toy.setStatus(Status.valueOf(updateToy.status()));
+        toy.setToyCategory(ToyCategory.valueOf(updateToy.toyCategory()));
     }
 }
