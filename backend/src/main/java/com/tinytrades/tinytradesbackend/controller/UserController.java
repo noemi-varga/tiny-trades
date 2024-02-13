@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/users")
 public class UserController {
     private final UserService userService;
 
@@ -21,24 +21,24 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping()
     public List<UserResponse> findAllUsers() {
         return userService.findAllUsers();
     }
 
-    @GetMapping("/users/{id}")
-    public UserResponse findUserById(@PathVariable Long id) {
-        return userService.findUserResponseById(id);
+    @GetMapping("/{userId}")
+    public UserResponse findUserById(@PathVariable Long userId) {
+        return userService.findUserResponseById(userId);
     }
 
-    @PostMapping("/users")
+    @PostMapping()
     public UserResponse addUser(@RequestBody NewUserRequest newUserRequest) {
         return userService.addUser(newUserRequest);
     }
 
-    @PutMapping("/users/{id}")
-    public ResponseEntity<?> updateUserById(@PathVariable Long id, @RequestBody UpdateUserRequest updateUserRequest) {
-        UserResponse userResponse = userService.updateUserById(id, updateUserRequest);
+    @PutMapping("/{userId}")
+    public ResponseEntity<?> updateUserById(@PathVariable Long userId, @RequestBody UpdateUserRequest updateUserRequest) {
+        UserResponse userResponse = userService.updateUserById(userId, updateUserRequest);
         return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
     }
 

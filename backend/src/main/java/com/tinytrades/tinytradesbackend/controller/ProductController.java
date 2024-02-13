@@ -9,43 +9,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/products")
 public class ProductController {
     private final ProductService productService;
-
     private final ClothingController clothingController;
-
 
     @Autowired
     public ProductController(ProductService productService, ClothingController clothingController) {
         this.productService = productService;
         this.clothingController = clothingController;
     }
-    @GetMapping("/products")
+    @GetMapping()
     public List<ProductResponse> findAllProducts() {
         return productService.findAllProducts();
     }
 
-    @GetMapping("/products/{userId}")
+    @GetMapping("/{userId}")
     public List<ProductResponse> findAllProductsByUser(@PathVariable Long userId) {
         return productService.findAllProductsByUserId(userId);
     }
 
-    @DeleteMapping("/products/{id}")
-    public void deleteProductById(@PathVariable Long id) {
-        productService.deleteProductById(id);
+    @DeleteMapping("/{productId}")
+    public void deleteProductById(@PathVariable Long productId) {
+        productService.deleteProductById(productId);
     }
 
-    @GetMapping("/products/search")
+    @GetMapping("/search")
     public List<ProductResponse> searchProducts(
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String gender,
             @RequestParam(required = false) String ageGroup
     ) {
-        List<ProductResponse> products = new ArrayList<>();
-        products.addAll(clothingController.searchClothing(title, gender, ageGroup));
-        //products.addAll(toyController.searchToy(titleFragment, gender));
-        return products;
+        return clothingController.searchClothing(title, gender, ageGroup);
     }
 
 }

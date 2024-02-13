@@ -1,7 +1,6 @@
 package com.tinytrades.tinytradesbackend.controller;
 
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
-import com.tinytrades.tinytradesbackend.dto.product.clothing.UpdateClothing;
 import com.tinytrades.tinytradesbackend.dto.product.toy.NewToy;
 import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
 import com.tinytrades.tinytradesbackend.dto.product.toy.UpdateToy;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/toy")
 public class ToyController {
     private final ToyService toyService;
 
@@ -21,29 +20,29 @@ public class ToyController {
         this.toyService = toyService;
     }
 
-    @GetMapping("/toy")
+    @GetMapping()
     public List<ProductResponse> findAllToys() {
         return toyService.findAllToys();
     }
 
-    @GetMapping("/toy/{id}")
+    @GetMapping("/{id}")
     public ToyResponse findToyById(@PathVariable Long id) {
         return toyService.findToyById(id);
     }
 
-    @GetMapping("/users/{userId}/toy")
+    @GetMapping("/users/{userId}")
     public List<ProductResponse> findAllToyByUserId(@PathVariable Long userId) {
         return toyService.findAllToysByUserId(userId);
     }
 
-    @PostMapping("/users/{userId}/toy")
+    @PostMapping("/users/{userId}")
     public ProductResponse addNewToy(@PathVariable Long userId, @RequestBody NewToy newToy){
         return toyService.addNewToy(userId, newToy);
     }
 
-    @PutMapping("/users/{userId}/toy/{id}")
-    public ProductResponse updateToy(@PathVariable Long userId, @PathVariable Long id, @RequestBody UpdateToy updateToy){
-        return toyService.updateToy(userId, id, updateToy);
+    @PutMapping("/{toyId}/users/{userId}/")
+    public ProductResponse updateToy(@PathVariable Long userId, @PathVariable Long toyId, @RequestBody UpdateToy updateToy){
+        return toyService.updateToy(userId, toyId, updateToy);
     }
 
 

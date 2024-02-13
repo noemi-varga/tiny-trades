@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/enums")
 public class EnumController {
 
+    // TODO enums to DB
+
     @GetMapping("/ageGroup")
     public List<String> getAgeGroups() {
         return Arrays.stream(AgeGroup.values())
