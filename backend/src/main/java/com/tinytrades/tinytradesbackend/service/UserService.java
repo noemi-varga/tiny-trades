@@ -23,10 +23,6 @@ public class UserService {
         return users.stream().map(UserMapper::mapToUserResponse).toList();
     }
 
-    public User findUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User not found with id: " + id));
-    }
-
     public UserResponse findUserResponseById(Long id) {
         return UserMapper.mapToUserResponse(findUserById(id));
     }
@@ -49,6 +45,10 @@ public class UserService {
 
         User user = userRepository.save(userToUpdate);
         return UserMapper.mapToUserResponse(user);
+    }
+
+    protected User findUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User not found with id: " + id));
     }
 
 }

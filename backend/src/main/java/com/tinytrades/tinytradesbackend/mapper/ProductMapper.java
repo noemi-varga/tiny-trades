@@ -85,20 +85,6 @@ public class ProductMapper {
                 .build();
     }
 
-    public static void setUpdateClothingToClothing(UpdateClothing updateClothing, Clothing clothing) {
-        clothing.setUpdatedAt(LocalDateTime.now());
-        clothing.setTitle(updateClothing.title());
-        clothing.setGender(Gender.valueOf(updateClothing.gender()));
-        clothing.setCondition(ConditionType.valueOf(updateClothing.condition()));
-        clothing.setAgeGroup(AgeGroup.valueOf(updateClothing.ageGroup()));
-        clothing.setDescription(updateClothing.description());
-        clothing.setTags(updateClothing.tags());
-        clothing.setStatus(Status.valueOf(updateClothing.status()));
-        clothing.setSize(ClothingSize.valueOf(updateClothing.size()));
-        clothing.setColor(ClothingColor.valueOf(updateClothing.color()));
-        clothing.setClothingCategory(ClothingCategory.valueOf(updateClothing.clothingCategory()));
-    }
-
     public static Toy mapNewToyToToy(NewToy newToy, User user) {
         return Toy.builder()
                 .trader(user)
@@ -113,6 +99,20 @@ public class ProductMapper {
                 .status(Status.ACTIVE)
                 .toyCategory(ToyCategory.valueOf(newToy.toyCategory()))
                 .build();
+    }
+
+    public static void setUpdateClothingToClothing(UpdateClothing updateClothing, Clothing clothing) {
+        clothing.setUpdatedAt(LocalDateTime.now());
+        clothing.setTitle(updateClothing.title());
+        clothing.setGender(Gender.valueOf(updateClothing.gender()));
+        clothing.setCondition(ConditionType.valueOf(updateClothing.condition()));
+        clothing.setAgeGroup(AgeGroup.valueOf(updateClothing.ageGroup()));
+        clothing.setDescription(updateClothing.description());
+        clothing.setTags(updateClothing.tags());
+        clothing.setStatus(Status.valueOf(updateClothing.status()));
+        clothing.setSize(ClothingSize.valueOf(updateClothing.size()));
+        clothing.setColor(ClothingColor.valueOf(updateClothing.color()));
+        clothing.setClothingCategory(ClothingCategory.valueOf(updateClothing.clothingCategory()));
     }
 
     public static void setUpdateToyToToy(UpdateToy updateToy, Toy toy) {
