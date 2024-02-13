@@ -10,6 +10,7 @@ import com.tinytrades.tinytradesbackend.model.enums.*;
 import com.tinytrades.tinytradesbackend.model.image.ProductImage;
 import com.tinytrades.tinytradesbackend.model.product.Toy;
 import com.tinytrades.tinytradesbackend.repository.ToyRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +19,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
+@RequiredArgsConstructor
 public class ToyService {
 
     private final ToyRepository toyRepository;
 
     private final UserService userService;
-
-    @Autowired
-    public ToyService(ToyRepository toyRepository, UserService userService) {
-        this.toyRepository = toyRepository;
-        this.userService = userService;
-    }
 
     public List<ProductResponse> findAllToys() {
         List<Toy> toys = toyRepository.findAll();

@@ -12,6 +12,7 @@ import com.tinytrades.tinytradesbackend.model.image.ProductImage;
 import com.tinytrades.tinytradesbackend.repository.ClothingRepository;
 import com.tinytrades.tinytradesbackend.repository.specifications.ClothingSearchCriteria;
 import com.tinytrades.tinytradesbackend.repository.specifications.ClothingSpecification;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -22,16 +23,11 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ClothingService {
 
     private final ClothingRepository clothingRepository;
     private final UserService userService;
-
-    @Autowired
-    public ClothingService(ClothingRepository clothingRepository, UserService userService) {
-        this.clothingRepository = clothingRepository;
-        this.userService = userService;
-    }
 
     public List<ProductResponse> findAllClothing() {
         List<Clothing> clothing = clothingRepository.findAll();
@@ -94,7 +90,7 @@ public class ClothingService {
             throw new IllegalArgumentException("User is not authorized to update this clothing");
         }
 
-        clothing.setUpdatedAt(LocalDateTime.now());
+         clothing.setUpdatedAt(LocalDateTime.now());
         clothing.setTitle(updateClothing.title());
         clothing.setGender(Gender.valueOf(updateClothing.gender()));
         clothing.setCondition(ConditionType.valueOf(updateClothing.condition()));

@@ -2,6 +2,7 @@ package com.tinytrades.tinytradesbackend.controller;
 
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import com.tinytrades.tinytradesbackend.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,15 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/products")
+@RequiredArgsConstructor
 public class ProductController {
+
     private final ProductService productService;
     private final ClothingController clothingController;
 
-    @Autowired
-    public ProductController(ProductService productService, ClothingController clothingController) {
-        this.productService = productService;
-        this.clothingController = clothingController;
-    }
     @GetMapping()
     public List<ProductResponse> findAllProducts() {
         return productService.findAllProducts();

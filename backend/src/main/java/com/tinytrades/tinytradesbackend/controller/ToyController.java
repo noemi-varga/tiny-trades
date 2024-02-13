@@ -5,6 +5,7 @@ import com.tinytrades.tinytradesbackend.dto.product.toy.NewToy;
 import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
 import com.tinytrades.tinytradesbackend.dto.product.toy.UpdateToy;
 import com.tinytrades.tinytradesbackend.service.ToyService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/toy")
+@RequiredArgsConstructor
 public class ToyController {
-    private final ToyService toyService;
 
-    @Autowired
-    public ToyController(ToyService toyService) {
-        this.toyService = toyService;
-    }
+    private final ToyService toyService;
 
     @GetMapping()
     public List<ProductResponse> findAllToys() {

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -27,13 +28,8 @@ class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
-    // @InjectMocks ?
+    @InjectMocks
     private UserService userService;
-
-    @BeforeEach
-    void setUp() {
-        this.userService = new UserService(userRepository);
-    }
 
     @DisplayName("JUnit test for findUserById method")
     @Test

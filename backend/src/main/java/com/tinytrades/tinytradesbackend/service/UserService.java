@@ -6,19 +6,17 @@ import com.tinytrades.tinytradesbackend.dto.user.UserResponse;
 import com.tinytrades.tinytradesbackend.mapper.UserMapper;
 import com.tinytrades.tinytradesbackend.model.user.User;
 import com.tinytrades.tinytradesbackend.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public List<UserResponse> findAllUsers() {
         List<User> users = userRepository.findAll();
