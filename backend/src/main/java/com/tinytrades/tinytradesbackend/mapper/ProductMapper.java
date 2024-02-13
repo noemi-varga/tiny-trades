@@ -2,12 +2,17 @@ package com.tinytrades.tinytradesbackend.mapper;
 
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.ClothingResponse;
+import com.tinytrades.tinytradesbackend.dto.product.clothing.NewClothing;
+import com.tinytrades.tinytradesbackend.dto.product.clothing.UpdateClothing;
 import com.tinytrades.tinytradesbackend.dto.product.toy.ToyResponse;
+import com.tinytrades.tinytradesbackend.model.enums.*;
 import com.tinytrades.tinytradesbackend.model.product.Clothing;
 import com.tinytrades.tinytradesbackend.model.product.Product;
 import com.tinytrades.tinytradesbackend.model.image.ProductImage;
 import com.tinytrades.tinytradesbackend.model.product.Toy;
+import com.tinytrades.tinytradesbackend.model.user.User;
 
+import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 public class ProductMapper {
@@ -58,5 +63,37 @@ public class ProductMapper {
                 .toyCategory(toy.getToyCategory().name())
                 .imageLinks(toy.getProductImages().stream().map(ProductImage::getUrl).collect(Collectors.toSet()))
                 .build();
+    }
+
+    public static Clothing mapNewClothingToClothing(NewClothing newClothing, User user) {
+        return Clothing.builder()
+                .trader(user)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .title(newClothing.title())
+                .gender(Gender.valueOf(newClothing.gender()))
+                .condition(ConditionType.valueOf(newClothing.condition()))
+                .ageGroup(AgeGroup.valueOf(newClothing.ageGroup()))
+                .description(newClothing.description())
+                .tags(newClothing.tags())
+                .status(Status.ACTIVE)
+                .size(ClothingSize.valueOf(newClothing.size()))
+                .color(ClothingColor.valueOf(newClothing.color()))
+                .clothingCategory(ClothingCategory.valueOf(newClothing.clothingCategory()))
+                .build();
+    }
+
+    public static void setUpdateClothingToClothing(UpdateClothing updateClothing, Clothing clothing) {
+        clothing.setUpdatedAt(LocalDateTime.now());
+        clothing.setTitle(updateClothing.title());
+        clothing.setGender(Gender.valueOf(updateClothing.gender()));
+        clothing.setCondition(ConditionType.valueOf(updateClothing.condition()));
+        clothing.setAgeGroup(AgeGroup.valueOf(updateClothing.ageGroup()));
+        clothing.setDescription(updateClothing.description());
+        clothing.setTags(updateClothing.tags());
+        clothing.setStatus(Status.valueOf(updateClothing.status()));
+        clothing.setSize(ClothingSize.valueOf(updateClothing.size()));
+        clothing.setColor(ClothingColor.valueOf(updateClothing.color()));
+        clothing.setClothingCategory(ClothingCategory.valueOf(updateClothing.clothingCategory()));
     }
 }
