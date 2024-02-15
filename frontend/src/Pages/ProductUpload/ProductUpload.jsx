@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./ProductUpload.css";
 import ProductForm from "../../Components/ProductForm";
+import UploadSuccessMessage from "../../Components/UploadSuccessMessage";
 
 const ProductUpload = () => {
   const [productType, setProductType] = useState("clothing");
   const [formData, setFormData] = useState({});
   const [tags, setTags] = useState([]);
   const [imageLinks, setImageLinks] = useState([]);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [uploadedProduct, setUploadedProduct] = useState({});
 
   const handleChangeProductType = (e) => {
     setProductType(e.target.value);
@@ -43,7 +46,7 @@ const ProductUpload = () => {
 
     console.log(data);
 
-    const endpoint = `/api/v1/users/${userId}/${productType}`;
+    const endpoint = `/api/v1/${productType}/users/${userId}`;
 
     try {
       const response = await fetch(endpoint, {
@@ -57,6 +60,8 @@ const ProductUpload = () => {
       if (response.ok) {
         const result = await response.json();
         console.log("Submission successful:", result);
+        setUploadSuccess(true);
+        setUploadedProduct(result);
       } else {
         console.error("Submission failed:", response.statusText);
       }
@@ -80,45 +85,54 @@ const ProductUpload = () => {
   };
 
   return (
-    <div className="product-upload-container">
-      <h2>Upload Product</h2>
+    <>
+      {!uploadSuccess ? (
+        <div className="product-upload-container">
+          <h2>Upload Product</h2>
 
-      <div className="product-type-selector">
-        <label>
-          <input
-            type="radio"
-            value="clothing"
-            checked={productType === "clothing"}
-            onChange={handleChangeProductType}
-          />{" "}
-          Clothing
-        </label>
+          <div className="product-type-selector">
+            <label>
+              <input
+                type="radio"
+                value="clothing"
+                checked={productType === "clothing"}
+                onChange={handleChangeProductType}
+              />{" "}
+              Clothing
+            </label>
 
-        <label>
-          <input
-            type="radio"
-            value="toy"
-            checked={productType === "toy"}
-            onChange={handleChangeProductType}
-          />{" "}
-          Toy
-        </label>
-      </div>
+            <label>
+              <input
+                type="radio"
+                value="toy"
+                checked={productType === "toy"}
+                onChange={handleChangeProductType}
+              />{" "}
+              Toy
+            </label>
+          </div>
 
-      <ProductForm
-        productType={productType}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-        addImageLink={handleAddImageLink}
-        changeImageLink={handleImageLinkChange}
-        removeImageLink={handleRemoveImageLink}
-        imageLinks={imageLinks}
-        tags={tags}
-        addTag={handleAddTag}
-        changeTag={handleTagChange}
-        removeTag={handleRemoveTag}
-      />
-    </div>
+          <ProductForm
+            productType={productType}
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+            addImageLink={handleAddImageLink}
+            changeImageLink={handleImageLinkChange}
+            removeImageLink={handleRemoveImageLink}
+            imageLinks={imageLinks}
+            tags={tags}
+            addTag={handleAddTag}
+            changeTag={handleTagChange}
+            removeTag={handleRemoveTag}
+          />
+        </div>
+      ) : (
+        <UploadSuccessMessage
+          productName={uploadedProduct.name}
+          productId={uploadedProduct.id}
+        />
+      )}
+    </>
   );
 };
 

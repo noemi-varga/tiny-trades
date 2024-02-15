@@ -1,6 +1,6 @@
 header {
     background-color: var(--tropical-blue); 
-    padding: 0.5rem 1rem;
+    padding: 0.3rem 1rem;
     box-shadow: 0 2px 4px rgba(36, 65, 121, 0.144);
   }
   
@@ -15,7 +15,7 @@ header {
   }
   
   .logo {
-    height: 12vh; 
+    height: 20vh; 
   }
   
   .nav-links {
