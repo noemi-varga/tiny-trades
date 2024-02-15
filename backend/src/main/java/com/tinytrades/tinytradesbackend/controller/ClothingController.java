@@ -8,6 +8,7 @@ import com.tinytrades.tinytradesbackend.repository.specifications.ClothingSearch
 import com.tinytrades.tinytradesbackend.service.ClothingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class ClothingController {
     }
 
     @PutMapping("/{clothingId}/users/{userId}/")
+    @ResponseStatus(HttpStatus.CREATED)
     public ProductResponse updateClothing(@PathVariable Long userId, @PathVariable Long clothingId, @RequestBody UpdateClothing updateClothing){
         return clothingService.updateClothing(userId, clothingId, updateClothing);
     }

@@ -7,6 +7,8 @@ import com.tinytrades.tinytradesbackend.dto.product.toy.UpdateToy;
 import com.tinytrades.tinytradesbackend.service.ToyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,11 +36,13 @@ public class ToyController {
     }
 
     @PostMapping("/users/{userId}")
+    @ResponseStatus(HttpStatus.CREATED)
     public ProductResponse addNewToy(@PathVariable Long userId, @RequestBody NewToy newToy){
         return toyService.addNewToy(userId, newToy);
     }
 
     @PutMapping("/{toyId}/users/{userId}/")
+    @ResponseStatus(HttpStatus.CREATED)
     public ProductResponse updateToy(@PathVariable Long userId, @PathVariable Long toyId, @RequestBody UpdateToy updateToy){
         return toyService.updateToy(userId, toyId, updateToy);
     }

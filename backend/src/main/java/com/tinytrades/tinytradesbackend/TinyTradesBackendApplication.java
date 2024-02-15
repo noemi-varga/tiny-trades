@@ -22,9 +22,9 @@ public class TinyTradesBackendApplication {
 		SpringApplication.run(TinyTradesBackendApplication.class, args);
 	}
 
-	@PostConstruct
-	public void seedDatabase() {
-		dataInitService.seedDatabase();
-	}
+//	@PostConstruct
+//	public void seedDatabase() {
+//		dataInitService.seedDatabase();
+//	}
 
 }
