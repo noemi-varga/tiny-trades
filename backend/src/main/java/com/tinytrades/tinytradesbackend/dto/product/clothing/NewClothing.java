@@ -1,8 +1,10 @@
 package com.tinytrades.tinytradesbackend.dto.product.clothing;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.Set;
 
 public record NewClothing(
-        String title,
+        @NotBlank(message = "Title must not be blank") String title,
         String gender,
         String condition,
         String ageGroup,
