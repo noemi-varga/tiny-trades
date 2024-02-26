@@ -2,6 +2,7 @@ package com.tinytrades.tinytradesbackend.controller;
 
 import com.tinytrades.tinytradesbackend.dto.product.ProductResponse;
 import com.tinytrades.tinytradesbackend.service.ProductService;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +24,12 @@ public class ProductController {
     }
 
     @GetMapping("/{userId}")
-    public List<ProductResponse> findAllProductsByUser(@PathVariable Long userId) {
+    public List<ProductResponse> findAllProductsByUser(@PathVariable @NotNull Long userId) {
         return productService.findAllProductsByUserId(userId);
     }
 
     @DeleteMapping("/{productId}")
-    public void deleteProductById(@PathVariable Long productId) {
+    public void deleteProductById(@PathVariable @NotNull Long productId) {
         productService.deleteProductById(productId);
     }
 
