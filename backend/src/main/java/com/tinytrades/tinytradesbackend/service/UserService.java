@@ -35,10 +35,8 @@ public class UserService {
     public UserResponse updateUserById(Long id, UpdateUserRequest updateUserRequest) {
         User userToUpdate = findUserById(id);
 
-        userToUpdate.setUsername(updateUserRequest.username());
         userToUpdate.setFirstName(updateUserRequest.firstName());
         userToUpdate.setLastName(updateUserRequest.lastName());
-        userToUpdate.setEmail(updateUserRequest.email());
         userToUpdate.setPassword(updateUserRequest.password());
         userToUpdate.setLocation(updateUserRequest.location());
         userToUpdate.setPhoneNumber(userToUpdate.getPhoneNumber());
