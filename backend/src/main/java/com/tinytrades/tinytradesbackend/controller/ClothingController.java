@@ -6,9 +6,10 @@ import com.tinytrades.tinytradesbackend.dto.product.clothing.NewClothing;
 import com.tinytrades.tinytradesbackend.dto.product.clothing.UpdateClothing;
 import com.tinytrades.tinytradesbackend.repository.specifications.ClothingSearchCriteria;
 import com.tinytrades.tinytradesbackend.service.ClothingService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,24 +26,24 @@ public class ClothingController {
     }
 
     @GetMapping("/{id}")
-    public ClothingResponse findClothingById(@PathVariable Long id) {
+    public ClothingResponse findClothingById(@PathVariable @NotNull Long id) {
         return clothingService.findClothingById(id);
     }
 
     @GetMapping("/users/{userId}")
-    public List<ProductResponse> findAllClothingByUserId(@PathVariable Long userId) {
+    public List<ProductResponse> findAllClothingByUserId(@PathVariable @NotNull Long userId) {
         return clothingService.findAllClothingByUserId(userId);
     }
 
     @PostMapping("/users/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductResponse addNewClothing(@PathVariable Long userId, @RequestBody NewClothing newClothing){
+    public ProductResponse addNewClothing(@PathVariable @NotNull Long userId, @RequestBody @Valid NewClothing newClothing){
         return clothingService.addNewClothing(userId, newClothing);
     }
 
     @PutMapping("/{clothingId}/users/{userId}/")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductResponse updateClothing(@PathVariable Long userId, @PathVariable Long clothingId, @RequestBody UpdateClothing updateClothing){
+    public ProductResponse updateClothing(@PathVariable @NotNull Long userId, @PathVariable @NotNull Long clothingId, @RequestBody @Valid UpdateClothing updateClothing){
         return clothingService.updateClothing(userId, clothingId, updateClothing);
     }
 
